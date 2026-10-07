@@ -151,5 +151,6 @@ Abre `http://localhost:4200` en el navegador.
 
 ## Desarrollado por
 
-[GitHub @emily2304](https://github.com/emily2304)
+Emily Sánchez
+Felipe Calderón
 <!-- Agrega tu LinkedIn o portafolio: [LinkedIn](https://www.linkedin.com/in/tu-usuario) -->
