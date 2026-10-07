@@ -1,2 +1,4 @@
-*.cpp
-*.ts
+# Archivos de audio y transcripciones generados en tiempo de ejecución
+BackEnd/src/*.mp3
+BackEnd/src/*.wav
+BackEnd/src/*.txt
