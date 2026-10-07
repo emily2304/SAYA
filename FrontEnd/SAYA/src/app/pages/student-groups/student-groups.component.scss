@@ -1,0 +1,67 @@
+.main-page-container {
+  min-height: 100vh;
+  background-color: #000;
+  display: flex;
+}
+
+app-sidebar {
+  flex-shrink: 0;
+  width: 80px;
+}
+
+.main-content {
+  padding: 40px;
+  margin-left: 200px; /* esto asegura que no lo tape el sidebar */
+  width: 100%;
+  color: white;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.option-btn {
+  background-color: #fff;
+  color: #000;
+  border-radius: 12px;
+  padding: 15px 20px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.03);
+    background-color: #f0f0f0;
+  }
+}
+
+/* Estilos para la imagen del grupo */
+.group-image {
+  width: 80px;           /* Tamaño reducido */
+  height: 80px;          /* Tamaño reducido */
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffc107;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Estilos para el contenedor del encabezado */
+.group-header {
+  max-width: 100%; /* El contenedor ahora ocupará todo el ancho disponible */
+  margin: 0 auto;  /* Centrado horizontal */
+}
+
+/* Opcional: Estilos para pantallas pequeñas */
+@media (max-width: 576px) {
+  .group-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .group-header {
+    max-width: 100%;
+  }
+}

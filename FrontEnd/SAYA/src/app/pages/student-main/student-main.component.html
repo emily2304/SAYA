@@ -1,0 +1,17 @@
+<div class="main-container">
+  <app-sidebar></app-sidebar>
+
+  <div class="content-container">
+    <div class="content-box">
+      <h2 class="text-center mb-4">Grupos</h2>
+
+      <div class="groups-container">
+        <div *ngFor="let group of studentGroups" class="group-card">
+          <h3>{{group.name}}</h3>
+          <p>{{group.description}}</p>
+          <button class="btn btn-primary btn-sm" (click)="enterGroup(group)">Entrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

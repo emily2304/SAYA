@@ -1,0 +1,61 @@
+<div class="files-container">
+  <app-sidebar></app-sidebar>
+  <div class="content-container">
+    <div class="files-box">
+      <h2 class="text-center mb-4"><i class="bi bi-folder-fill"></i> Mis Archivos</h2>
+
+      <div class="mb-3">
+        <label for="fileUpload" class="form-label"><fa-icon [icon]="faPlusCircle" class="me-2"></fa-icon> Agregar Nuevo Archivo</label>
+        <input type="file" class="form-control" id="fileUpload" (change)="onFileSelected($event)">
+        <button class="btn btn-primary mt-2" (click)="uploadFile()" [disabled]="!newFile || isUploading">
+          <span *ngIf="!isUploading">Subir Archivo</span>
+          <span *ngIf="isUploading">
+            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+            Subiendo...
+          </span>
+        </button>
+        <div *ngIf="errorMessage && !isUploading" class="mt-2 text-danger"><i class="bi bi-exclamation-triangle-fill me-2"></i> {{ errorMessage }}</div>
+        <div *ngIf="successMessage && !isUploading" class="mt-2 text-success"><i class="bi bi-check-circle-fill me-2"></i> {{ successMessage }}</div>
+      </div>
+
+      <ul class="list-group" *ngIf="files.length > 0; else noFiles">
+        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let file of files">
+          <div>
+            <fa-icon [icon]="faFileAlt" class="me-2"></fa-icon> {{ file.name }}
+            <small class="text-muted ms-2">({{ file.size }}, {{ file.uploadDate | date }})</small>
+          </div>
+          <div>
+            <button class="btn btn-sm btn-info me-2" (click)="viewFile(file.id)" title="Ver archivo"><fa-icon [icon]="faEye"></fa-icon></button>
+            <button class="btn btn-sm btn-danger" (click)="confirmDeleteFile(file.id, file.name)" title="Eliminar archivo"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+          </div>
+        </li>
+      </ul>
+
+      <ng-template #noFiles>
+        <div class="text-muted text-center mt-3">No hay afiches cargados.</div>
+      </ng-template>
+
+      <div *ngIf="showConfirmationDelete" class="confirmation-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i> Confirmar Eliminación</h5>
+            <button type="button" class="btn-close" (click)="cancelDeleteFile()"></button>
+          </div>
+          <div class="modal-body">
+            <p>¿Estás seguro de que deseas eliminar el archivo "{{ fileToDeleteName }}"?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="cancelDeleteFile()">Cancelar</button>
+            <button type="button" class="btn btn-danger" (click)="deleteFile()" [disabled]="isDeleting">
+              <span *ngIf="!isDeleting"><fa-icon [icon]="faTrashAlt" class="me-2"></fa-icon> Eliminar</span>
+              <span *ngIf="isDeleting">
+                <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                Eliminando...
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

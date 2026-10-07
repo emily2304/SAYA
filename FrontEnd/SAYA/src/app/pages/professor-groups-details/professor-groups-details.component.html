@@ -1,0 +1,25 @@
+<div class="professor-groups-details-container d-flex">
+  <app-sidebar1></app-sidebar1>
+
+  <div class="main-content">
+    <div class="header-container text-center mb-4"> <div class="group-header d-flex flex-column align-items-center"> <img
+          [src]="groupImageUrl"
+          alt="Imagen del grupo"
+          class="group-image mb-2"
+        >
+        <h2 class="text-warning m-0">{{ groupName }}</h2> </div>
+    </div>
+
+    <div class="options-container">
+      <div
+        class="option-btn d-flex justify-content-between align-items-center"
+        *ngFor="let item of items"
+        (click)="navigateTo(item)"
+        style="cursor: pointer;"
+      >
+        <span>{{ item }}</span>
+        <i class="bi bi-eye text-primary fs-5"></i>
+      </div>
+    </div>
+  </div>
+</div>

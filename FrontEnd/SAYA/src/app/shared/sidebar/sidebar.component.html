@@ -1,0 +1,42 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h1 class="app-title">
+      <span class="text-warning">Transcriptor</span> <span class="text-primary">SayA</span>
+    </h1>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="nav-item" (click)="goToMain()" [class.active]="isActive('main')">
+      <i class="bi bi-people-fill"></i>
+      <span class="nav-text">Grupos</span>
+    </a>
+    @for (item of items; track $index) {}
+    <a class="nav-item" (click)="goToAI()" [class.active]="isActive('ai')">
+      <i class="bi bi-robot"></i>
+      <span class="nav-text">Asistente IA</span>
+    </a>
+
+    <a class="nav-item" (click)="goToTranscription()" [class.active]="isActive('transcription')">
+      <i class="bi bi-mic-fill"></i>
+      <span class="nav-text">Mis transcripciones</span>
+    </a>
+
+    <a class="nav-item" (click)="goToAfiches()" [class.active]="isActive('afiches')">
+      <i class="bi bi-image"></i> <span class="nav-text">Mis afiches</span>
+    </a>
+
+    <a class="nav-item" (click)="goToCuestionarios()" [class.active]="isActive('cuestionarios')">
+      <i class="bi bi-patch-question-fill"></i> <span class="nav-text">Mis cuestionarios</span>
+    </a>
+
+    <a class="nav-item" (click)="goToStudyRoom()" [class.active]="isActive('study-room')">
+      <i class="bi bi-book-fill"></i>
+      <span class="nav-text">Sala de estudio</span>
+    </a>
+
+    <a class="nav-item logout" (click)="logout()">
+      <i class="bi bi-box-arrow-left"></i>
+      <span class="nav-text">Salir</span>
+    </a>
+  </nav>
+</div>

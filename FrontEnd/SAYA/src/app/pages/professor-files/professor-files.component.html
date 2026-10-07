@@ -1,0 +1,84 @@
+<div class="main-page-container">
+  <app-sidebar1></app-sidebar1>
+
+  <div class="main-content">
+    <h3 class="mb-3"><i class="bi bi-file-earmark-richtext-fill"></i> Afiches del grupo</h3>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+    <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+
+    <ul class="list-group" *ngIf="afiches && afiches.length > 0; else noAfiches">
+      <li class="list-group-item" *ngFor="let afiche of afiches">
+        <div class="d-flex justify-content-between align-items-start">
+          <div class="flex-grow-1">
+            <div>
+              <fa-icon [icon]="faFileAlt" class="me-2"></fa-icon>
+              <strong>{{ afiche.titulo }}</strong>
+              <small class="text-muted ms-2">({{ afiche.createdAt | date:'short' }})</small>
+            </div>
+
+            <div class="mt-2 text-dark" style="max-height: 150px; overflow-y: auto; background-color: #f8f9fa; padding: 10px; border-radius: 5px;">
+              <p><strong>Resumen:</strong> {{ afiche.resumen }}</p>
+              <p><strong>Conceptos clave:</strong>
+                <span *ngIf="afiche.conceptos_clave?.length > 0">
+                  {{ afiche.conceptos_clave.join(', ') }}
+                </span>
+                <span *ngIf="!afiche.conceptos_clave || afiche.conceptos_clave.length === 0">
+                  <em>No definidos</em>
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div class="ms-3">
+            <button class="btn btn-sm btn-info me-2"
+                    (click)="viewAfiche(afiche)"
+                    title="Descargar PDF">
+              <fa-icon [icon]="faDownload"></fa-icon>
+            </button>
+
+            <button class="btn btn-sm btn-danger"
+                    (click)="confirmDeleteAfiche(afiche.id, afiche.titulo)"
+                    title="Eliminar afiche">
+              <fa-icon [icon]="faTrashAlt"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+    <ng-template #noAfiches>
+      <div class="text-muted text-center mt-3">No hay afiches creados para este grupo.</div>
+    </ng-template>
+
+    <!-- Modal de confirmación -->
+    <div class="modal-backdrop" *ngIf="showConfirmationDelete">
+      <div class="modal-container">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5>Confirmar eliminación</h5>
+            <button (click)="cancelDelete()" [disabled]="isDeleting">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>¿Está seguro de eliminar <strong>"{{fileToDeleteName}}"</strong>?</p>
+            <p class="text-danger"><small>Esta acción no se puede deshacer</small></p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary"
+                    (click)="cancelDelete()"
+                    [disabled]="isDeleting">
+              Cancelar
+            </button>
+            <button class="btn btn-danger"
+                    (click)="deleteAfiche()"
+                    [disabled]="isDeleting">
+              <span *ngIf="isDeleting" class="spinner-border spinner-border-sm"></span>
+              {{ isDeleting ? 'Eliminando...' : 'Eliminar' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

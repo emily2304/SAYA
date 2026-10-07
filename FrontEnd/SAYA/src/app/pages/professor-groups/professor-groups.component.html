@@ -1,0 +1,35 @@
+<div class="main-page-container d-flex">
+  <app-sidebar1></app-sidebar1>
+
+  <div class="main-content">
+    <!-- Encabezado con botón fijo -->
+    <div class="header d-flex justify-content-between align-items-center mb-4">
+      <h2 class="text-warning">Mis Grupos</h2>
+      <button class="btn btn-primary" (click)="createGroup()">
+        <i class="bi bi-plus-lg"></i> Crear Nuevo Grupo
+      </button>
+    </div>
+
+    <div class="groups-container">
+      <!-- Lista de grupos del profesor -->
+      <div *ngFor="let group of professorGroups" class="group-card d-flex justify-content-between align-items-center">
+        <div class="group-info">
+          <h4 class="mb-1">{{ group.name }}</h4>
+          <p class=>{{ group.description || 'Sin descripción' }}</p>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn btn-outline-primary btn-sm me-2" (click)="viewGroup(group)" title="Ver grupo">
+            <i class="bi bi-eye"></i>
+          </button>
+          <button class="btn btn-outline-warning btn-sm me-2" (click)="editGroup(group)" title="Editar grupo">
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button class="btn btn-outline-danger btn-sm" (click)="confirmDeleteGroup(group)" title="Eliminar grupo">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

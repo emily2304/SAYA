@@ -1,0 +1,36 @@
+# Node modules
+node_modules/
+
+# Compiled TypeScript
+dist/
+build/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Editor settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Angular build (si lo tienes en el mismo repo)
+angular/dist/
+.angular/
+
+# Coverage reports
+coverage/
+.nyc_output/

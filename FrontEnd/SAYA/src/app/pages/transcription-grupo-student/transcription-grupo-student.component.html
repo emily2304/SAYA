@@ -1,0 +1,123 @@
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-md-3"> <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="col-md-9"> <div class="row">
+        <div class="col-md-6">
+
+
+          <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+              <h5>Transcribir archivo</h5>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="transcriptionForm">
+                <div class="mb-3">
+                  <label for="archivoId" class="form-label">Selecciona un archivo para transcribir</label>
+                  <select class="form-select" id="archivoId" formControlName="archivoId">
+                    <option value="">-- Selecciona un archivo --</option>
+                    <option *ngFor="let archivo of archivos" [value]="archivo._id">{{ archivo.filename }}</option>
+                  </select>
+                </div>
+                <button type="button" class="btn btn-info text-white" (click)="transcribirArchivo()" [disabled]="isLoading">
+                  <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  {{ isLoading ? 'Transcribiendo...' : 'Transcribir archivo' }}
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header bg-success text-white">
+              <h5>Tus transcripciones</h5>
+            </div>
+            <div class="card-body">
+              <div *ngIf="transcripciones.length === 0" class="alert alert-info">
+                No tienes transcripciones aún. Sube un archivo MP3 y transcríbelo.
+              </div>
+              <ul class="list-group">
+                <li *ngFor="let transcripcion of transcripciones" class="list-group-item d-flex justify-content-between align-items-center">
+                  <div>
+                    <strong>{{ transcripcion.nombreArchivo }}</strong>
+                    <small class="d-block text-muted">{{ transcripcion.fecha | date:'medium' }}</small>
+                  </div>
+                  <div>
+                    <button class="btn btn-sm btn-outline-primary me-2" (click)="seleccionarTranscripcion(transcripcion)">
+                      Consultar
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary" (click)="descargarTranscripcion(transcripcion)">
+                      <i class="bi bi-download"></i>
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6" *ngIf="showChatSection">
+          <div class="card mb-3">
+            <div class="card-header bg-warning text-dark">
+              <h5>Consultar transcripción</h5>
+            </div>
+            <div class="card-body">
+              <div class="btn-group mb-3" role="group">
+                <button type="button" class="btn"
+                        [class.btn-warning]="chatMode === 'resumen'"
+                        [class.btn-outline-warning]="chatMode !== 'resumen'"
+                        (click)="cambiarModo('resumen')">
+                  Resumen
+                </button>
+                <button type="button" class="btn"
+                        [class.btn-warning]="chatMode === 'afiche'"
+                        [class.btn-outline-warning]="chatMode !== 'afiche'"
+                        (click)="cambiarModo('afiche')">
+                  Afiche
+                </button>
+                <button type="button" class="btn"
+                        [class.btn-warning]="chatMode === 'glosario'"
+                        [class.btn-outline-warning]="chatMode !== 'glosario'"
+                        (click)="cambiarModo('glosario')">
+                  Glosario
+                </button>
+              </div>
+
+              <form [formGroup]="chatForm" (ngSubmit)="enviarConsulta()">
+                <div class="mb-3">
+                  <label class="form-label">IA</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" id="deepseek" value="deepseek" formControlName="provider" checked>
+                    <label class="form-check-label" for="deepseek">DeepSeek</label>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-warning" [disabled]="isLoading">
+                  <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  {{ isLoading ? 'Procesando...' : 'Enviar consulta' }}
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class="card" *ngIf="chatResponse">
+            <div class="card-header bg-dark text-white">
+              <h5>Resultado</h5>
+            </div>
+            <div class="card-body">
+              <div class="alert"
+                   [class.alert-info]="chatMode === 'resumen'"
+                   [class.alert-success]="chatMode === 'afiche'"
+                   [class.alert-primary]="chatMode === 'glosario'">
+                <pre *ngIf="chatResponse.startsWith('{') || chatResponse.startsWith('[')">{{ chatResponse | json }}</pre>
+                <div *ngIf="!chatResponse.startsWith('{') && !chatResponse.startsWith('[')" [innerHTML]="chatResponse | nl2br"></div>
+                <button class="btn btn-outline-secondary mt-3" (click)="descargarResultado()">
+                  <i class="bi bi-download"></i> Descargar resultado
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

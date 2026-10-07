@@ -1,0 +1,91 @@
+<div class="main-container">
+  <app-sidebar1></app-sidebar1>
+  <div class="content-container">
+    <div class="content-box">
+      <h2>Mis transcripciones</h2>
+      <div class="groups-container">
+        <div class="group-card" *ngFor="let t of transcripciones" (click)="seleccionarTranscripcion(t)">
+          <h4>{{ t.nombreArchivo }}</h4>
+          <p>{{ t.transcripcion.slice(0, 100) }}...</p>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTranscription" class="content-box" style="margin-top: 40px;">
+        <h3>Generar Cuestionario</h3>
+        <button class="btn-generate" (click)="generarCuestionario()">
+          <i class="fas fa-magic"></i> Generar cuestionario para: {{ selectedTranscription.nombreArchivo }}
+        </button>
+      </div>
+
+      <!-- Lista de cuestionarios disponibles -->
+      <div *ngIf="!cuestionarioActivo">
+        <h3>Cuestionarios Disponibles</h3>
+        <div class="groups-container">
+          <div class="group-card" *ngFor="let q of cuestionarios">
+            <div class="quiz-header">
+              <h4>{{ q.nombreArchivo || 'Cuestionario' }}</h4>
+              <span class="quiz-source">
+              </span>
+            </div>
+
+            <div class="quiz-actions">
+              <button class="btn-start-quiz" (click)="iniciarCuestionario(q)">
+                <i class="fas fa-play"></i> Realizar Cuestionario
+              </button>
+
+              <div class="secondary-actions">
+                <button class="btn-download" (click)="descargarCuestionario(q)">
+                  <i class="fas fa-download"></i> Descargar
+                </button>
+                <button class="btn-delete" (click)="eliminarCuestionario(q._id)">
+                  <i class="fas fa-trash-alt"></i> Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vista del cuestionario activo -->
+      <div *ngIf="cuestionarioActivo" class="quiz-container">
+        <h3>{{ cuestionarioActivo.nombre }}</h3>
+
+        <div *ngFor="let pregunta of cuestionarioActivo.preguntas; let i = index" class="quiz-question">
+          <h4>{{ i + 1 }}. {{ pregunta.texto }}</h4>
+
+          <div class="quiz-options">
+            <div *ngFor="let opcion of pregunta.opciones; let j = index"
+                class="quiz-option"
+                [class.correct]="opcion.correcta"
+                [class.selected]="respuestasUsuario[i] === opcion.texto"
+                (click)="seleccionarRespuesta(i, j)">
+              {{ opcion.texto }}
+              <span *ngIf="mostrandoResultado && opcion.correcta" class="correct-marker">✓</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-submit-quiz" (click)="enviarCuestionario()"
+                [disabled]="getCantidadRespuestas() < cuestionarioActivo.preguntas.length">
+          <i class="fas fa-paper-plane"></i> Enviar Respuestas
+        </button>
+      </div>
+
+      <!-- Resultados del cuestionario -->
+      <div *ngIf="mostrandoResultado && resultadoCuestionario" class="quiz-results">
+        <h3>Resultados del Cuestionario</h3>
+        <div class="result-card" [class.passed]="resultadoCuestionario.correctas / resultadoCuestionario.total >= 0.6">
+          <h4>Calificación: {{ (resultadoCuestionario.correctas / resultadoCuestionario.total * 100).toFixed(0) }}%</h4>
+          <p>Respuestas correctas: {{ resultadoCuestionario.correctas }} de {{ resultadoCuestionario.total }}</p>
+        </div>
+
+        <button class="btn-restart-quiz" (click)="reiniciarCuestionario()">
+          <i class="fas fa-redo"></i> Intentar de nuevo
+        </button>
+        <button class="btn-back-to-list" (click)="cuestionarioActivo = null; mostrandoResultado = false">
+          <i class="fas fa-list"></i> Volver a la lista
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

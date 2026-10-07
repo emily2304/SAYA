@@ -1,0 +1,329 @@
+/* Estilos para el cuestionario */
+.quiz-container {
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.quiz-question {
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: #222;
+  border-radius: 8px;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.quiz-option {
+  padding: 10px 15px;
+  background-color: #333;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quiz-option:hover {
+  background-color: #444;
+}
+
+.quiz-option.selected {
+  background-color: #4e54c8;
+  color: white;
+}
+
+/* Botones específicos del cuestionario */
+.btn-start-quiz {
+  background: linear-gradient(135deg, #4CAF50, #8BC34A);
+  color: white;
+  padding: 8px 16px;
+  margin-top: 10px;
+}
+
+.btn-submit-quiz {
+  background: linear-gradient(135deg, #2196F3, #03A9F4);
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.btn-submit-quiz:disabled {
+  background: #666;
+  cursor: not-allowed;
+}
+
+/* Resultados */
+.quiz-results {
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.result-card {
+  background-color: #222;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.result-card.passed {
+  border-left: 5px solid #4CAF50;
+}
+
+.result-card.failed {
+  border-left: 5px solid #F44336;
+}
+
+.btn-restart-quiz {
+  background: linear-gradient(135deg, #FF9800, #FFC107);
+  color: white;
+  margin-right: 10px;
+}
+
+.btn-back-to-list {
+  background: linear-gradient(135deg, #9E9E9E, #607D8B);
+  color: white;
+}
+
+.main-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #000;
+  color: #fff;
+  position: relative; /* Añadido para contexto de posicionamiento */
+}
+
+/* Sidebar - asumiendo que es app-sidebar */
+app-sidebar {
+  width: 250px;
+  background-color: #111;
+  position: fixed; /* Fija el sidebar */
+  height: 100vh;
+  z-index: 1000; /* Asegura que esté por encima */
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.content-container {
+  margin-left: 250px; /* Igual al ancho del sidebar */
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #000; /* Fondo oscuro para el área de contenido */
+  min-height: 100vh;
+}
+
+.content-box {
+  background-color: #111;
+  padding: 30px;
+  border-radius: 15px;
+  border: 1px solid #222;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(13, 110, 253, 0.4);
+}
+
+/* Estilos para los elementos de la lista */
+.menu-item {
+  display: block;
+  padding: 12px 20px;
+  color: #eee;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.menu-item:hover {
+  background-color: #1a1a1a;
+  border-left: 3px solid #4e54c8;
+}
+
+.menu-item.active {
+  background-color: #1a1a1a;
+  border-left: 3px solid #4e54c8;
+  font-weight: bold;
+}
+
+/* Estilos para el texto de transcripción */
+.transcription-text {
+  background-color: #1a1a1a;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+/* Estilos para los checkboxes personalizados */
+input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+.quiz-question {
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: #222;
+  border-radius: 8px;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.quiz-option {
+  position: relative;
+  padding: 10px 15px;
+  background-color: #333;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quiz-option:hover {
+  background-color: #444;
+}
+
+.quiz-option.selected {
+  background-color: #4e54c8;
+  color: white;
+}
+
+.quiz-option.correct {
+  border-left: 4px solid #4CAF50;
+}
+
+.correct-marker {
+  position: absolute;
+  right: 15px;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+/* Mostrar respuestas correctas después de enviar */
+.quiz-option.correct-answer {
+  background-color: rgba(76, 175, 80, 0.2);
+  border-left: 4px solid #4CAF50;
+}
+
+/* Estilos generales para tarjetas de cuestionario */
+.group-card {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.group-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 150, 255, 0.1);
+}
+
+/* Encabezado del cuestionario */
+.quiz-header {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #333;
+}
+
+.quiz-header h4 {
+  color: #4e9af1;
+  margin-bottom: 5px;
+}
+
+.quiz-source {
+  color: #aaa;
+  font-size: 0.9rem;
+  display: block;
+}
+
+/* Contenedor de acciones */
+.quiz-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.secondary-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Estilos mejorados para botones */
+.btn-start-quiz {
+  background: linear-gradient(135deg, #4e9af1, #67b7f7);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-start-quiz:hover {
+  background: linear-gradient(135deg, #3d8ae0, #5caef5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(78, 154, 241, 0.3);
+}
+
+.btn-download {
+  background: linear-gradient(135deg, #4CAF50, #66BB6A);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-generate {
+  background: linear-gradient(135deg, #25526b, #3c559a);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-delete {
+  background: linear-gradient(135deg, #F44336, #EF5350);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-download:hover, .btn-delete:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+/* Iconos */
+.fas {
+  font-size: 14px;
+}

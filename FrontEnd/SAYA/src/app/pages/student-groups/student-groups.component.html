@@ -1,0 +1,30 @@
+<div class="main-page-container d-flex">
+  <app-sidebar></app-sidebar>
+
+  <div class="main-content">
+    <div class="header-container text-center mb-4"> <!-- Contenedor centrado -->
+      <div class="group-header d-flex flex-column align-items-center"> <!-- Flex column para apilar elementos -->
+        <!-- Imagen del grupo (más pequeña) -->
+        <img
+          [src]="groupImageUrl"
+          alt="Imagen del grupo"
+          class="group-image mb-2"
+        >
+        <!-- Nombre del grupo -->
+        <h2 class="text-warning m-0">{{ groupName }}</h2> <!-- m-0 para quitar margen extra -->
+      </div>
+    </div>
+
+    <div class="options-container">
+      <div
+        class="option-btn d-flex justify-content-between align-items-center border rounded p-3 mb-2"
+        *ngFor="let item of items"
+        (click)="navigateTo(item.label)"
+        style="cursor: pointer;"
+      >
+        <span class="fw-semibold">{{ item.label }}</span>
+        <i class="bi bi-eye text-primary fs-5"></i>
+      </div>
+    </div>
+  </div>
+</div>

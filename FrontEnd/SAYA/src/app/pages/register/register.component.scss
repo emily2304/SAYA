@@ -1,0 +1,87 @@
+.register-container {
+  min-height: 100vh;
+  background-color: #000;
+  color: #fff;
+  border: 3px solid #0d6efd;
+  border-radius: 20px;
+  padding: 40px 20px;
+  animation: fadeIn 1s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.app-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.register-box {
+  background-color: #111;
+  padding: 30px;
+  border-radius: 15px;
+  border: 1px solid #222;
+  max-width: 550px; /* Aquí he aumentado el valor para hacerlo más grande */
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(13, 110, 253, 0.4);
+}
+
+.form-label {
+  color: #a0c4ff;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-control {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  color: white;
+  padding: 12px 15px;
+  transition: all 0.3s;
+
+  &:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  }
+}
+
+input::placeholder {
+  color: #a0c4ff;
+  opacity: 1;
+}
+
+.custom-btn {
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: #0a58ca;
+  }
+}
+
+.alert {
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .register-container {
+    padding: 50px;
+    border: none;
+    border-radius: 0;
+  }
+
+  .register-box {
+    padding: 50px;
+  }
+}

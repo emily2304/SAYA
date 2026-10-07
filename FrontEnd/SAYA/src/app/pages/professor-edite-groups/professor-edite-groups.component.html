@@ -1,0 +1,106 @@
+<div class="edit-group-container">
+  <app-sidebar1></app-sidebar1>
+
+  <div class="content-container">
+    <div class="main-content">
+      <div class="edit-group-box">
+        <h2>Editar Grupo</h2>
+
+        <form [formGroup]="groupForm" (ngSubmit)="updateGroup()">
+          <!-- Nombre del Grupo -->
+          <div class="form-group mb-3">
+            <label for="nombre" class="form-label">Nombre del Grupo</label>
+            <input type="text" class="form-control" id="nombre"
+                   formControlName="nombre" required>
+            <div *ngIf="groupForm.get('nombre')?.invalid &&
+                       (groupForm.get('nombre')?.dirty || groupForm.get('nombre')?.touched)"
+                 class="text-danger">
+              El nombre del grupo es requerido
+            </div>
+          </div>
+
+          <!-- Descripción -->
+          <div class="form-group mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <textarea class="form-control" id="descripcion"
+                      formControlName="descripcion" rows="3"></textarea>
+          </div>
+
+          <!-- Imagen del Grupo -->
+          <div class="form-group mb-3">
+            <label for="urlImagen" class="form-label">
+              <fa-icon [icon]="faImage"></fa-icon> URL de la imagen
+            </label>
+            <input type="text" class="form-control" id="urlImagen"
+                   formControlName="urlImagen" placeholder="https://...">
+            <div *ngIf="groupForm.get('urlImagen')?.value" class="mt-2">
+              <img [src]="groupForm.get('urlImagen')?.value"
+                   alt="Imagen del grupo"
+                   class="img-thumbnail preview-image"
+                   onerror="this.style.display='none'">
+            </div>
+          </div>
+
+          <!-- Miembros Actuales -->
+          <div class="current-members mb-4" *ngIf="currentMembers.length > 0">
+            <h5>Miembros del grupo</h5>
+            <div class="members-list">
+              <div class="member-item" *ngFor="let member of currentMembers">
+                <div class="member-info">
+                  <div class="member-name">{{ member.nombre }}</div>
+                  <div class="member-email text-muted small">{{ member.email }}</div>
+                </div>
+                <div class="member-role">
+                  <span class="badge bg-primary">{{ member.rol || 'miembro' }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Agregar Nuevos Miembros -->
+          <div class="form-group mb-4">
+            <label class="form-label">Agregar nuevos miembros por email</label>
+            <div formArrayName="members">
+              <div *ngFor="let member of members.controls; let i = index" class="input-group mb-2">
+                <input [formControlName]="i" class="form-control" placeholder="email@dominio.com" />
+                <button type="button" class="btn btn-outline-danger"
+                        (click)="removeMemberField(i)"
+                        [disabled]="currentProcessingIndex === i">
+                  Eliminar
+                </button>
+                <div *ngIf="currentProcessingIndex === i" class="processing-indicator">
+                  <div class="spinner-border spinner-border-sm" role="status">
+                    <span class="visually-hidden">Procesando...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-outline-primary mt-2"
+                    (click)="addMemberField()"
+                    [disabled]="loading">
+              + Agregar Email
+            </button>
+          </div>
+
+          <!-- Botón de Guardar -->
+          <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary"
+                    [disabled]="loading || groupForm.invalid">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+              {{ loading ? 'Guardando...' : 'Guardar Cambios' }}
+            </button>
+          </div>
+
+          <!-- Mensajes de estado -->
+          <div *ngIf="updateSuccess" class="alert alert-success mt-3">
+            Grupo actualizado exitosamente
+            <span *ngIf="members.value.length > 0"> - Miembros agregados: {{ members.value.join(', ') }}</span>
+          </div>
+          <div *ngIf="updateError" class="alert alert-danger mt-3">
+            {{ updateError }}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

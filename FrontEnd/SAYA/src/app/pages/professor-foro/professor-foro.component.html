@@ -1,0 +1,45 @@
+<div class="announcements-container">
+  <app-sidebar1></app-sidebar1>
+
+  <!-- Main area -->
+  <div class="content-container">
+    <div class="header">
+      <h2><i class="bi bi-megaphone-fill"></i> Foro </h2>
+      <p class=>Postea las noticia importantes para los estudiantes</p>
+    </div>
+
+    <!-- Existing announcements list -->
+    <div class="announcements-list">
+      <div *ngFor="let announcement of announcements" class="announcement-card">
+        <div class="announcement-header">
+          <span class="date">{{announcement.date | date:'medium'}}</span>
+          <button class="btn btn-sm btn-outline-danger" (click)="deleteAnnouncement(announcement.id)">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+        <div class="announcement-content">
+          <p>{{announcement.message}}</p>
+        </div>
+        <div *ngIf="announcement.attachment" class="attachment">
+          <i class="bi bi-paperclip"></i>
+          <a [href]="announcement.attachment.url" target="_blank">{{announcement.attachment.name}}</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- New announcement form -->
+    <div class="new-announcement">
+      <h4><i class="bi bi-plus-circle"></i> Nuevo post</h4>
+      <div class="form-group">
+        <textarea [(ngModel)]="newAnnouncement" class="form-control"
+                  placeholder="Escriba aquí su post..." rows="4"></textarea>
+      </div>
+
+      <div class="actions">
+        <button (click)="postAnnouncement()" class="btn btn-primary" [disabled]="!newAnnouncement.trim()">
+          <i class="bi bi-send-fill"></i> Enviar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

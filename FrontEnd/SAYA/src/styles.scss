@@ -1,0 +1,45 @@
+@use 'sass:color';
+@use 'bootstrap/scss/bootstrap';
+$bootstrap-icons-font: "node_modules/bootstrap-icons/font/fonts/bootstrap-icons";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+/* Variables globales */
+$primary-color: #0d6efd;
+$dark-bg: #1a1a1a;
+
+/* Estilos globales */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+
+/* Estilos para el sidebar (puedes mover esto a su propio archivo .scss después) */
+.sidebar {
+  background-color: $dark-bg;
+
+  .nav-item {
+    color: #ddd;
+    transition: all 0.3s;
+
+    &:hover {
+      color: white;
+      background-color: color.scale($dark-bg, $lightness: -5%);
+    }
+
+    &.active {
+      background-color: $primary-color;
+    }
+  }
+}
+
+/* Mixins útiles (opcional) */
+@mixin card-styles {
+  background-color: $dark-bg;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+

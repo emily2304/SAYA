@@ -1,0 +1,28 @@
+.card {
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  font-weight: bold;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background-color: #6785a4;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.list-group-item {
+  transition: all 0.3s ease;
+}
+
+.list-group-item:hover {
+  background-color: #64798f;
+}
+
+.btn-group .btn {
+  transition: all 0.3s ease;
+}

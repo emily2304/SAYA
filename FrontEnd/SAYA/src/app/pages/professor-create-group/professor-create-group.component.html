@@ -1,0 +1,36 @@
+<div class="create-group-container">
+  <app-sidebar1></app-sidebar1>
+
+  <div class="content-container">
+    <div class="create-group-box">
+      <h2>Crear Grupo</h2>
+
+      <form [formGroup]="groupForm" (ngSubmit)="createGroup()">
+        <div class="form-group">
+          <label for="nombre">Nombre del Grupo</label>
+          <input id="nombre" formControlName="nombre" type="text" class="form-control" required />
+        </div>
+
+        <div class="form-group mt-2">
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" formControlName="descripcion" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group mt-2">
+          <label for="urlImagen">URL del ícono del grupo</label>
+          <input id="urlImagen" formControlName="urlImagen" type="text" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3" [disabled]="groupForm.invalid">Crear Grupo</button>
+      </form>
+
+      <div *ngIf="creationSuccess" class="alert alert-success mt-3">
+        Grupo creado exitosamente.
+      </div>
+
+      <div *ngIf="creationError" class="alert alert-danger mt-3">
+        {{ creationError }}
+      </div>
+    </div>
+  </div>
+</div>
